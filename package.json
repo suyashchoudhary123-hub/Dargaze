@@ -1,0 +1,18 @@
+{
+  "name": "dargaze",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["shared", "server", "client"],
+  "scripts": {
+    "dev": "npm run build --workspace @dargaze/shared && concurrently -k -n API,CLIENT -c red,cyan \"npm:dev --workspace @dargaze/server\" \"npm:dev --workspace @dargaze/client\"",
+    "build": "npm run build --workspace @dargaze/shared && npm run build --workspace @dargaze/server && npm run build --workspace @dargaze/client",
+    "test": "npm run build --workspace @dargaze/shared && npm run test --workspace @dargaze/shared && npm run test --workspace @dargaze/server",
+    "typecheck": "npm run build --workspace @dargaze/shared && npm run typecheck --workspace @dargaze/shared && npm run typecheck --workspace @dargaze/server && npm run typecheck --workspace @dargaze/client",
+    "start": "npm run start --workspace @dargaze/server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.7.3",
+    "vitest": "^5.0.3"
+  }
+}
